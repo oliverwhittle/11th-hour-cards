@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oops I forgot a card 🎄</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Shadows+Into+Light+Two&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lobster', cursive;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            flex-direction: row;
+            gap: 200px;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px 35px;
+            border-radius: 20px;
+            width: 500px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        form:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-family: 'Lobster', cursive;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            font-family: 'Shadows Into Light Two', cursive;
+            font-size: 1.1rem;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.25);
+            color: #000;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff4d4d, #ff9999);
+            color: white;
+            font-family: 'Lobster', cursive;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+
+        #cardPreview {
+            margin-top: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #cardPreview label {
+            font-size: 4rem;
+            margin-bottom: 40px;
+            font-family: 'Shadows Into Light Two', cursive;
+        }
+
+        #cardPreview #previewImage {
+            width: 400px;
+            height: 600px;
+            max-width: 400px;
+            max-height: 600px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+
+        #buy-me-a-coffee {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="bg-music" autoplay loop>
+        <source src="./assets/soft-christmas-piano.mp3" type="audio/mpeg">
+    </audio>
+    <form id="cardForm">
+        <h1>🎄 Create Your Card</h1>
+
+        <label>Recipient Name</label>
+        <input type="text" name="to" required />
+
+        <label>Message</label>
+        <textarea name="message" rows="4" required></textarea>
+
+        <label>Sign-off</label>
+        <select name="signoff" required>
+            <option value="Love from">Love from</option>
+            <option value="From">From</option>
+            <option value="Best wishes,">Best wishes,</option>
+        </select>
+
+        <label>From</label>
+        <input type="text" name="from" required />
+
+        <br>
+
+        <label>Card Theme</label>
+        <select name="theme">
+            <option value="trees" selected>Christmas Trees</option>
+            <option value="bauble">Bauble</option>
+            <option value="santa">Santa</option>
+            <option value="reindeer">Reindeer</option>
+            <option value="snowman">Snowman</option>
+        </select>
+
+        <label>Music</label>
+        <select name="music">
+            <option value="soft-christmas-piano" selected>Soft Christmas Piano</option>
+            <option value="we-wish-you-a-merry-christmas">We Wish You a Merry Christmas</option>
+            <option value="jolly-christmas">Jolly Christmas</option>
+        </select>
+
+        <button type="submit">Generate Card ✨</button>
+    </form>
+
+    <section id="cardPreview">
+        <label>Preview</label>
+        <img id="previewImage" src="./assets/trees.jpg" alt="Card Theme Preview">
+    </section>
+
+    <section id="buy-me-a-coffee">
+        <a href="https://buymeacoffee.com/oliverwhittle" target="_blank">
+            <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"
+                style="height: 30px;">
+        </a>
+    </section>
+
+    <script>
+        const form = document.getElementById('cardForm');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const to = form.elements['to'].value;
+            const message = form.elements['message'].value;
+            const signoff = form.elements['signoff'].value;
+            const from = form.elements['from'].value;
+
+            const theme = form.elements['theme'] ? form.elements['theme'].value : 'trees';
+            const music = form.elements['music'] ? form.elements['music'].value : 'soft-christmas-piano';
+
+            const encodedMessage = btoa(message);
+
+            const url = `card.html?to=${encodeURIComponent(to)}&message=${encodeURIComponent(encodedMessage)}&signoff=${encodeURIComponent(signoff)}&from=${encodeURIComponent(from)}&theme=${encodeURIComponent(theme)}&music=${encodeURIComponent(music)}`;
+            window.location.href = url;
+        });
+
+        const themeChoice = form.elements['theme'];
+        const previewImage = document.getElementById('previewImage');
+        themeChoice.onchange = () => {
+            previewImage.src = `./assets/${form.elements['theme'].value}.jpg`;
+        };
+
+        const music = document.getElementById('bg-music');
+        const musicChoice = form.elements['music'];
+
+        musicChoice.onchange = () => {
+            music.src = `./${form.elements['music'].value}.mp3`;
+            music.load();
+            music.play();
+        };
+    </script>
+</body>
+
+</html>
