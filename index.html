@@ -30,9 +30,8 @@
         form {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
-            padding: 40px 35px;
             border-radius: 20px;
-            width: 500px;
+            width: min(90vw, 500px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
             background-size: cover;
@@ -126,8 +125,9 @@
         }
 
         #cardPreview #previewImage {
-            width: 400px;
-            height: 600px;
+            width: min(80vw, 400px);
+    height: auto;
+    aspect-ratio: 2 / 3;
             max-width: 400px;
             max-height: 600px;
             border-radius: 20px;
@@ -141,6 +141,49 @@
             right: 20px;
             z-index: 1000;
         }
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px 10px;
+        height: auto;
+    }
+form {
+        padding: 25px 20px;
+    }
+h1 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    #cardPreview label {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+}
+@media (hover: none) {
+    form:hover,
+    button:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+@media (max-width: 600px) {
+    #buy-me-a-coffee {
+        bottom: 10px;
+        right: 10px;
+        transform: scale(0.85);
+    }
+}
     </style>
 </head>
 
@@ -203,6 +246,11 @@
     </section>
 
     <script>
+document.body.addEventListener('click', () => {
+    const music = document.getElementById('bg-music');
+    if (music.paused) music.play();
+}, { once: true });
+
         const form = document.getElementById('cardForm');
 
         form.addEventListener('submit', (e) => {
