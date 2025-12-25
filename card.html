@@ -324,6 +324,7 @@
 
     <div id="open-message">Click to Open</div>
     <button id="copyBtn">🔗 Copy Link</button>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
 
     <script>
         const openMessage = document.getElementById('open-message');
@@ -333,17 +334,28 @@
             openMessage.classList.toggle('hidden');
         });
 
+        const themes = ["trees", "baubles", "lights", "santa", "reindeer", "snowman", "shepherds"];
+        const musics = ["soft-christmas-piano", "we-wish-you-a-merry-christmas", "jolly-christmas"];
+
         const params = new URLSearchParams(window.location.search);
-        document.getElementById('to').textContent = `To, ${params.get('to')}`;
+        const compressed = params.get('d');
 
-        const message = atob(params.get('message'));
-        document.getElementById('message').textContent = message;
+        if (compressed) {
+            const payload = LZString.decompressFromEncodedURIComponent(compressed);
+            const [to, message, signoff, from, themeIndex, musicIndex] = payload.split("\u001f");
 
-        document.getElementById('signoff').textContent = params.get('signoff');
-        document.getElementById('from').textContent = params.get('from');
+            document.getElementById('to').textContent = `To, ${to}`;
+            document.getElementById('message').textContent = message;
+            document.getElementById('signoff').textContent = signoff;
+            document.getElementById('from').textContent = from;
 
-        document.getElementById('front-content').style.backgroundImage = `url("./assets/${params.get('theme')}.jpg")`;
-        document.getElementById('bg-music').src = `./assets/${params.get('music')}.mp3`;
+            const theme = themes[parseInt(themeIndex)] || themes[0];
+            const music = musics[parseInt(musicIndex)] || musics[0];
+
+            document.getElementById('front-content').style.backgroundImage = `url("./assets/${theme}.jpg")`;
+            document.getElementById('bg-music').src = `./assets/${music}.mp3`;
+        }
+
 
         document.getElementById('copyBtn').addEventListener('click', e => {
             e.stopPropagation();

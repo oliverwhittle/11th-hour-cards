@@ -260,7 +260,7 @@
                 style="height: 50px;">
         </a>
     </section>
-
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('cardForm');
@@ -271,7 +271,6 @@
             form.elements['theme'].value = 'trees';
             form.elements['music'].value = 'soft-christmas-piano';
         });
-
 
         document.body.addEventListener('click', () => {
             const music = document.getElementById('bg-music');
@@ -288,12 +287,18 @@
             const signoff = form.elements['signoff'].value;
             const from = form.elements['from'].value;
 
-            const theme = form.elements['theme'] ? form.elements['theme'].value : 'trees';
-            const music = form.elements['music'] ? form.elements['music'].value : 'soft-christmas-piano';
+            const theme = ["trees", "baubles", "lights", "santa", "reindeer", "snowman", "shepherds"].includes(form.elements['theme'].value) 
+                ? form.elements['theme'].value 
+                : 'trees';
+            const music = ["soft-christmas-piano", "we-wish-you-a-merry-christmas", "jolly-christmas"].includes(form.elements['music'].value) 
+                ? form.elements['music'].value 
+                : 'soft-christmas-piano';
 
-            const encodedMessage = btoa(message);
+            const payload = [to, message, signoff, from, theme, music].join("\u001f");
 
-            const url = `card.html?to=${encodeURIComponent(to)}&message=${encodeURIComponent(encodedMessage)}&signoff=${encodeURIComponent(signoff)}&from=${encodeURIComponent(from)}&theme=${encodeURIComponent(theme)}&music=${encodeURIComponent(music)}`;
+            const compressed = LZString.compressToEncodedURIComponent(payload);
+
+            const url = `card.html?d=${compressed}`;
             window.location.href = url;
         });
 
