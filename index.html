@@ -262,6 +262,8 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
     <script>
+        const music = document.getElementById('bg-music');
+
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('cardForm');
             form.elements['to'].value = '';
@@ -273,7 +275,6 @@
         });
 
         document.body.addEventListener('click', () => {
-            const music = document.getElementById('bg-music');
             if (music.paused) music.play();
         }, { once: true });
 
@@ -287,18 +288,16 @@
             const signoff = form.elements['signoff'].value;
             const from = form.elements['from'].value;
 
-            const theme = ["trees", "baubles", "lights", "santa", "reindeer", "snowman", "shepherds"].includes(form.elements['theme'].value) 
-                ? form.elements['theme'].value 
-                : 'trees';
-            const music = ["soft-christmas-piano", "we-wish-you-a-merry-christmas", "jolly-christmas"].includes(form.elements['music'].value) 
-                ? form.elements['music'].value 
-                : 'soft-christmas-piano';
+            const THEMES = ["trees", "baubles", "lights", "santa", "reindeer", "snowman", "shepherds"];
+            const MUSICS = ["soft-christmas-piano", "we-wish-you-a-merry-christmas", "jolly-christmas"];
 
-            const payload = [to, message, signoff, from, theme, music].join("\u001f");
+            let themeChoiceValue = Math.max(0, THEMES.indexOf(form.elements['theme'].value));
+            let musicChoiceValue = Math.max(0, MUSICS.indexOf(form.elements['music'].value));
 
-            const compressed = LZString.compressToEncodedURIComponent(payload);
+            let payload = [to, message, signoff, from, themeChoiceValue, musicChoiceValue].join("\u001f");
+            let compressed = LZString.compressToEncodedURIComponent(payload);
 
-            const url = `card.html?d=${compressed}`;
+            let url = `card.html?d=${compressed}`;
             window.location.href = url;
         });
 
@@ -308,11 +307,10 @@
             previewImage.src = `./assets/${form.elements['theme'].value}.jpg`;
         };
 
-        const music = document.getElementById('bg-music');
         const musicChoice = form.elements['music'];
-
+        const source = music.querySelector('source');
         musicChoice.onchange = () => {
-            music.src = `./assets/${form.elements['music'].value}.mp3`;
+            source.src = `./assets/${form.elements['music'].value}.mp3`;
             music.load();
             music.play();
         };
