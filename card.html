@@ -7,6 +7,7 @@
     <title>Oops I forgot a card 🎄</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Shadows+Into+Light+Two&display=swap');
+
         body {
             width: 100%;
             min-height: 100vh;
@@ -18,16 +19,19 @@
             color: white;
         }
 
-html, body {
-overflow-x: hidden;
-}
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
         .card {
-    width: min(90vw, 400px);
-    aspect-ratio: 2 / 3;
+            width: min(90vw, 400px);
+            aspect-ratio: 2 / 3;
 
-    height: auto;          /* IMPORTANT */
-    max-height: none;      /* remove caps here */
+            height: auto;
+            max-height: none;
             position: relative;
             transform-style: preserve-3d;
             cursor: pointer;
@@ -38,25 +42,25 @@ overflow-x: hidden;
             display: flex;
         }
 
-        
+
         .card.open {
             transition: 1s;
             transition-timing-function: ease-in-out;
             transition-delay: 0s;
-            transform: translateX(200px);
+            transform: translateX(50%);
         }
-        
+
         .card:not(.open) {
             transition: 1s;
             transition-timing-function: ease-in-out;
             transition-delay: 0s;
             transform: translateX(0px);
         }
-        
+
         .card.open .front {
-            transform: rotateY(-160deg) scale(1.1);   
+            transform: rotateY(-160deg) scale(1.1);
         }
-        
+
         #front-content {
             justify-content: center;
             align-items: center;
@@ -69,27 +73,27 @@ overflow-x: hidden;
             height: 100%;
             opacity: 1;
         }
-        
+
         .card.open #front-content,
         #open-message.hidden {
             opacity: 0;
             transition-delay: 0s;
         }
-        
+
         .card:not(.open) #front-content {
             opacity: 1;
             transition-delay: 0.25s;
         }
-        
+
         #open-message:not(.hidden) {
             opacity: 1;
             transition-delay: 1s;
         }
-        
+
         .card.open .back {
             transform: rotateY(-20deg) scale(1.1);
         }
-        
+
         .front,
         .back {
             position: absolute;
@@ -100,7 +104,7 @@ overflow-x: hidden;
             transform-origin: left center;
             transition: transform 2s ease, box-shadow 0.5s ease-in-out;
         }
-        
+
         .front {
             justify-content: center;
             align-items: center;
@@ -114,7 +118,7 @@ overflow-x: hidden;
 
         .back #to {
             position: absolute;
-            top: 5%;
+            top: 2%;
             left: 10%;
             font-size: 2rem;
             font-family: 'Shadows Into Light Two', cursive;
@@ -134,7 +138,7 @@ overflow-x: hidden;
 
         .back #signoff {
             position: absolute;
-            top: 70%;
+            bottom: 12%;
             left: 10%;
             font-size: 2rem;
             font-family: 'Shadows Into Light Two', cursive;
@@ -142,7 +146,7 @@ overflow-x: hidden;
 
         .back #from {
             position: absolute;
-            top: 80%;
+            bottom: 2%;
             left: 20%;
             font-size: 2rem;
             font-family: 'Shadows Into Light Two', cursive;
@@ -217,60 +221,58 @@ overflow-x: hidden;
             }
         }
 
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
 
-    body {
-        perspective: 800px;
-        padding: 40px;
-align-items: flex-start;
-    }
+            body {
+                perspective: 800px;
+                align-items: center;
+            }
 
-    .card {
-        width: 70vw;        /* smaller card */
-        max-width: 260px;   /* hard stop */
-    }
+            .card {
+                width: 40vw;
+                max-width: 260px;
+            }
 
-    .card.open {
-        transform: translateX(40vw);
-    }
+            .card.open {
+                transform: translateX(50%);
+            }
 
-    .card.open .front {
-        transform: rotateY(-150deg) scale(1.05);
-    }
+            .card.open .front {
+                transform: rotateY(-160deg) scale(1.1);
+            }
 
-    .card.open .back {
-        transform: rotateY(-15deg) scale(1.05);
-    }
+            .card.open .back {
+                transform: rotateY(-20deg) scale(1.1);
+            }
 
-    /* Text scaling */
-    .front {
-        font-size: 1.4rem;
-    }
+            .front {
+                font-size: 1.4rem;
+            }
 
-    .back #to,
-    .back #signoff,
-    .back #from {
-        font-size: 1.2rem;
-    }
+            .back #to,
+            .back #signoff,
+            .back #from {
+                font-size: 1rem;
+            }
 
-    .back #message {
-        font-size: 1.6rem;
-        width: 90%;
-    }
+            .back #message {
+                top: 38%;
+                font-size: 1.2rem;
+                width: 90%;
+            }
 
-    /* Buttons & prompts */
-    #open-message {
-        bottom: 15%;
-        font-size: 1.3rem;
-        text-align: center;
-    }
+            #open-message {
+                bottom: 15%;
+                font-size: 1.3rem;
+                text-align: center;
+            }
 
-    #copyBtn {
-        bottom: 5%;
-        font-size: 0.9rem;
-        padding: 8px 12px;
-    }
-}
+            #copyBtn {
+                bottom: 5%;
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
     </style>
 </head>
 
@@ -291,7 +293,7 @@ align-items: flex-start;
             <p id="from"></p>
         </div>
     </div>
-    
+
     <div id="open-message">Click to Open</div>
     <button id="copyBtn">🔗 Copy Link</button>
 
