@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Oops I forgot a card 🎄</title>
+    <title>11th hour cards 🎄</title>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Shadows+Into+Light+Two&display=swap"
         rel="stylesheet">
     <style>
@@ -257,11 +257,22 @@
     <section id="buy-me-a-coffee">
         <a href="https://buymeacoffee.com/oliverwhittle" target="_blank">
             <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"
-                style="height: 30px;">
+                style="height: 50px;">
         </a>
     </section>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('cardForm');
+            form.elements['to'].value = '';
+            form.elements['message'].value = '';
+            form.elements['signoff'].value = 'Love from';
+            form.elements['from'].value = '';
+            form.elements['theme'].value = 'trees';
+            form.elements['music'].value = 'soft-christmas-piano';
+        });
+
+
         document.body.addEventListener('click', () => {
             const music = document.getElementById('bg-music');
             if (music.paused) music.play();
@@ -296,7 +307,7 @@
         const musicChoice = form.elements['music'];
 
         musicChoice.onchange = () => {
-            music.src = `./${form.elements['music'].value}.mp3`;
+            music.src = `./assets/${form.elements['music'].value}.mp3`;
             music.load();
             music.play();
         };
