@@ -226,9 +226,13 @@ align-items: flex-start;
     }
 
     .card {
-        width: 80vw;
-        max-height: 340px;
-        min-height: 260px;
+        width: 75vw;          /* narrower */
+        max-width: 280px;
+
+        aspect-ratio: 2 / 3;
+
+        max-height: 260px;    /* MUCH smaller */
+        min-height: 220px;
     }
 
     .card.open {
