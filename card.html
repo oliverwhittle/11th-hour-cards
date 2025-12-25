@@ -18,9 +18,13 @@
             color: white;
         }
 
+html, body {
+    overflow-x: hidden;
+}
+
         .card {
-            height: 600px;
-            width: 400px;
+            width: min(90vw, 400px);
+    height: min(75vh, 600px);
             position: relative;
             transform-style: preserve-3d;
             cursor: pointer;
@@ -86,7 +90,7 @@
         .front,
         .back {
             position: absolute;
-            width: 400px;
+            width: 100%;
             height: 100%;
             top: 0;
             left: 0;
@@ -209,6 +213,60 @@
                 transform: translateY(110vh);
             }
         }
+
+@media (max-width: 768px) {
+
+    body {
+        perspective: 800px;
+        padding: 10px;
+    }
+
+    .card {
+        width: 90vw;
+        height: 70vh;
+    }
+
+    .card.open {
+        transform: translateX(40vw);
+    }
+
+    .card.open .front {
+        transform: rotateY(-150deg) scale(1.05);
+    }
+
+    .card.open .back {
+        transform: rotateY(-15deg) scale(1.05);
+    }
+
+    /* Text scaling */
+    .front {
+        font-size: 1.4rem;
+    }
+
+    .back #to,
+    .back #signoff,
+    .back #from {
+        font-size: 1.2rem;
+    }
+
+    .back #message {
+        font-size: 1.6rem;
+        width: 90%;
+    }
+
+    /* Buttons & prompts */
+    #open-message {
+        bottom: 15%;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    #copyBtn {
+        bottom: 5%;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
     </style>
 </head>
 
