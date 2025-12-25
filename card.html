@@ -24,9 +24,10 @@ overflow-x: hidden;
 
         .card {
     width: min(90vw, 400px);
-    aspect-ratio: 2 / 3;   /* card shape */
-    max-height: 520px;
-min-height: 300px; /* ← THIS fixes it */
+    aspect-ratio: 2 / 3;
+
+    height: auto;          /* IMPORTANT */
+    max-height: none;      /* remove caps here */
             position: relative;
             transform-style: preserve-3d;
             cursor: pointer;
@@ -220,18 +221,13 @@ min-height: 300px; /* ← THIS fixes it */
 
     body {
         perspective: 800px;
-        padding: 20px;
+        padding: 40px;
 align-items: flex-start;
     }
 
     .card {
-        width: 75vw;          /* narrower */
-        max-width: 280px;
-
-        aspect-ratio: 2 / 3;
-
-        max-height: 260px;    /* MUCH smaller */
-        min-height: 220px;
+        width: 70vw;        /* smaller card */
+        max-width: 260px;   /* hard stop */
     }
 
     .card.open {
