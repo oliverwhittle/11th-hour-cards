@@ -23,8 +23,11 @@ overflow-x: hidden;
 }
 
         .card {
-            width: min(90vw, 400px);
-    height: min(75vh, 600px);
+            .card {
+    width: min(90vw, 400px);
+    aspect-ratio: 2 / 3;   /* card shape */
+    max-height: 520px;
+}
             position: relative;
             transform-style: preserve-3d;
             cursor: pointer;
@@ -222,8 +225,8 @@ overflow-x: hidden;
     }
 
     .card {
-        width: 90vw;
-        height: 70vh;
+        width: 85vw;
+        max-height: 420px;
     }
 
     .card.open {
